@@ -1,7 +1,7 @@
 # ProSync / EventHub – 後端（Spring Boot）
 
 **目標**：跑通「活動/票種 → 下單保留 → 加密幣報價 → 付款確認」  
-**原則**：一次只改 1 檔，改完就跑/測一下 👣
+**原則**：一次只改 1 檔，改完就跑/測一下 
 
 ---
 
@@ -25,7 +25,7 @@ docker run -d --name mysql8-dev \
 # Redis 7
 docker run -d --name redis-dev -p 6379:6379 redis:7-alpine
 ```
-### prod（示範：MySQL 用 3307）
+### prod（ex：MySQL 用 3307）
 
 ```bash
 docker run -d --name mysql8-prod \   
@@ -37,7 +37,7 @@ docker run -d --name mysql8-prod \
 
 ---
 
-## 2) 設定檔（重點對齊）
+## 2) 設定檔
 
 - `application.yml`
 
@@ -65,7 +65,7 @@ docker run -d --name mysql8-prod \
 
     - 其餘同 dev
 
-- `app.jobs.*`（與程式碼一致）
+- `app.jobs.*`
 
     - `app.jobs.payments-expire.*`
 
@@ -116,7 +116,7 @@ java -jar target/ProSync-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 5) 身分驗證（示例）
+## 5) 身分驗證
 
 多數 API 需要 **USER** 角色；管理端需要 **ADMIN**
 
@@ -232,7 +232,7 @@ curl -X POST http://localhost:8080/api/public/payment/confirm-payment/<paymentId
 
 ---
 
-## 9) 常見問題（超白話）
+## 9) 常見問題
 
 
 -  **400** ：驗證失敗、參數錯  
@@ -256,7 +256,7 @@ curl -X POST http://localhost:8080/api/public/payment/confirm-payment/<paymentId
 
 - **Redis 連線**：確認 `spring.redis.*` 與容器 port（6379），沒跑起來鎖會失敗
 ---
-## API 路徑對照表（依目前控制器）
+## API 路徑對照表
 
 ### public-user-controller
 | 方法   | 路徑                  | 需要角色   | 說明        |
