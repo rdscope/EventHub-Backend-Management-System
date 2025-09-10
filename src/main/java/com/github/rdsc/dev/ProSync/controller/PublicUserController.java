@@ -178,11 +178,11 @@ public class PublicUserController {
         ));
 
         // 1. 過濾器先看門（JwtAuthFilter）：從 Authorization: Bearer <token> 取出 token，驗證成功就把「已登入身份（email + roles）」塞進 SecurityContext；失敗就清空身份。
-        // 2. 安全規則在中間（SecurityConfig）：只有 /register、/login 放行，其它（包含 /me）都要求「已登入」。
+        // 2. 安全規則在中間（SecurityConfig）：只有 /register、/login 放行，其它（包含 /is-me）都要求「已登入」。
         // 3. Controller 最後判斷（me() 那段）：
         //      如果 SecurityContext 裡沒有已登入 → 回 401。
         //      如果有已登入 → 取出 email 和 roles，回 200 + JSON。
-        // (1) 請求 /api/users/me 進來
+        // (1) 請求 /api/users/is-me 進來
         // (2) SecurityConfig 建好的 SecurityFilterChain 先跑
         //     └─ 規則：/register、/login 放行；其他要驗證
         // (3) 進入 JwtAuthFilter（被 SecurityConfig 掛上去了）

@@ -60,7 +60,7 @@ class UserLoginIntegrationTest {
 
         String token = loginAndGetToken(email, pwd);
 
-        mockMvc.perform(get("/api/users/me")
+        mockMvc.perform(get("/api/users/is-me")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer" + token))
                 .andExpect(status().isOk());
     }
@@ -78,9 +78,9 @@ class UserLoginIntegrationTest {
                 .andExpect(status().isUnauthorized()); // 401
     }
 
-    @Test // 沒帶 token 打 /me
+    @Test // 沒帶 token 打 /is-me
     void call_me_without_token_should_401() throws Exception {
-        mockMvc.perform(post("/api/users/me"))
+        mockMvc.perform(post("/api/users/is-me"))
                 .andExpect(status().isUnauthorized()); // 401
     }
 }

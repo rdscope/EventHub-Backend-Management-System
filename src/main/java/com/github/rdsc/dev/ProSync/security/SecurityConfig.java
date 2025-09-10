@@ -3,6 +3,7 @@ package com.github.rdsc.dev.ProSync.security;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -35,6 +36,15 @@ public class SecurityConfig { // 宣告一個具名類別，承載安全設定�
         // 定義一條安全規則鏈（Filter Chain），接受 HttpSecurity (DSL 物件)：所有請求進來，要走哪些關卡
         // DSL 物件是承載這個小語言的一個 Java 物件，上面有一堆可鏈式呼叫的方法，可以用「像句子」的方式把設定講完
 
+//        http.cors(cors -> {});
+//        http.cors(cors -> cors.configurationSource(request -> {
+//            CorsConfiguration config = new CorsConfiguration();
+//            config.setAllowedOrigins(List.of("http://localhost:5173"));
+//            config.setAllowedMethods(List.of("GET","POST","PUT","DELETE"));
+//            config.setAllowedHeaders(List.of("*"));
+//            return config;
+//        }));
+
         // 1/ REST API 常用：關 CSRF、改成無狀態
         // 子 DSL（有 cfg -> 的）：要描述規則 - 用來「設定某一塊主題」的屬性與規則
         http.csrf(csrf -> csrf.disable());
@@ -54,6 +64,7 @@ public class SecurityConfig { // 宣告一個具名類別，承載安全設定�
 
         // 2/ 授權規則：放行註冊/登入，其餘要驗證  URL 規則 和 @PreAuthorize 雙保險
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // Swagger / OpenAPI 白名單
                 .requestMatchers("/v3/api-docs/**",
                         "/swagger-ui/**",
