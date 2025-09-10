@@ -75,12 +75,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
         </dependency>
-        <!-- 測試工具大禮包（JUnit、AssertJ、Mockito…）  //  OrderFlowIntegrationTest、之後的 RBAC 測試-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- 啟用 @Valid、@NotNull、@NotBlank 等參數/DTO 驗證  //  各種 *Dto 與 Controller 參數驗證（錯了會被 GlobalExceptionHandler 接住）-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
