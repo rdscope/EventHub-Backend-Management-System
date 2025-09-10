@@ -2,7 +2,7 @@ package com.github.rdsc.dev.ProSync.controller;
 
 import com.github.rdsc.dev.ProSync.enums.UserRole;
 import com.github.rdsc.dev.ProSync.enums.UserStatus;
-import com.github.rdsc.dev.ProSync.repository.UserRepository;
+
 import com.github.rdsc.dev.ProSync.security.JwtUtil;
 import com.github.rdsc.dev.ProSync.dto.UserDto;
 import com.github.rdsc.dev.ProSync.model.User;

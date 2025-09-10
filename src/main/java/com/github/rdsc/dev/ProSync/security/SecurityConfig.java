@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
+
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.time.Instant;
@@ -36,7 +36,7 @@ public class SecurityConfig { // 宣告一個具名類別，承載安全設定�
         // 定義一條安全規則鏈（Filter Chain），接受 HttpSecurity (DSL 物件)：所有請求進來，要走哪些關卡
         // DSL 物件是承載這個小語言的一個 Java 物件，上面有一堆可鏈式呼叫的方法，可以用「像句子」的方式把設定講完
 
-//        http.cors(cors -> {});
+        http.cors(cors -> {});
 //        http.cors(cors -> cors.configurationSource(request -> {
 //            CorsConfiguration config = new CorsConfiguration();
 //            config.setAllowedOrigins(List.of("http://localhost:5173"));
