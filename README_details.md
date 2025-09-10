@@ -17,7 +17,7 @@
 ### dev（MySQL 用 3308、Redis 6379）
 ```bash
 # MySQL 8（DB=ProSync，root 密碼=my-secret-pw）
-docker run -d --name mysql8-dev \
+docker run -d --name mysql-dev \
 	-e MYSQL_ROOT_PASSWORD=my-secret-pw \
 	-e MYSQL_DATABASE=ProSync \
 	-p 3308:3306 mysql:8
@@ -28,7 +28,7 @@ docker run -d --name redis-dev -p 6379:6379 redis:7-alpine
 ### prod（ex：MySQL 用 3307）
 
 ```bash
-docker run -d --name mysql8-prod \   
+docker run -d --name mysql-prod \   
 	-e MYSQL_ROOT_PASSWORD=please-change-me \   
 	-e MYSQL_DATABASE=ProSync \   
 	-p 3307:3306 mysql:8
