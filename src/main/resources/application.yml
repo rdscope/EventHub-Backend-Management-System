@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: ProSync
+
+  profiles:
+    active: dev # 先用 dev，之後要切 prod 再改成 prod
+
+  redis:
+    host: localhost   # 本機或 Docker 對外的位址
+    port: 6379        # 預設 port
+    timeout: 2s       # 連線/指令逾時，避免等太久
+
+  cache:
+    type: redis # 自動組態就會建立 RedisCacheManager
+    redis:
+      time-to-live: 60s   # 快取壽命：60 秒（到期會自動失效）
+
+
+app:
+  jobs:
+    expire-payments:
+      delay-ms: 15000          # 每輪間隔 15 秒
+      initial-delay-ms: 5000   # 啟動後先等 5 秒
+    restock-orders:
+      delay-ms: 30000          # 每輪間隔 30 秒
+      initial-delay-ms: 5000
+    verification:
+      purge-delay-ms: 60000
+      initial-delay-ms: 5000
+    locks-purge:
+      delay-ms: 60000          # 每 60 秒清理一次過期的本機短鎖（RedisLockHelper.purgeExpired）
+      initial-delay-ms: 10000
+    external-quotes:
+      initial-delay-ms: 5000   # 啟動後 5 秒跑第一次
+      delay-ms: 60000
+
+  external-quotes:
+    enabled: true              # 要不要自動抓外部匯率
+    provider: coingecko        # 先用 CoinGecko（免金鑰）
+    base: ${app.pricing.base-currency:TWD}   # 法幣基準，沿用 TWD
+    assets: # 要追的資產清單（大寫）
+      - BTC
+      - ETH
+      - USDT
+
+  pricing:
+    base-currency: TWD
+
+
+logging:
+  level:
+    root: INFO
+    com.github.rdsc.dev.ProSync: DEBUG
+    org.springframework.security: INFO
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"

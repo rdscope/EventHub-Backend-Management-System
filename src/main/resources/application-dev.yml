@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/ProSync?useUnicode=true&characterEncoding=UTF-8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:my-secret-pw}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  flyway:
+    baselineOnMigrate: true
+
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    database: 0
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
